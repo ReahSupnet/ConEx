@@ -25,7 +25,15 @@
         </td>
     </tr>
 </table>
+<hr>
 
-    <hr>
+<ul>
+    @foreach($posts as $post)
+        <div class="card">
+            <li style="list-style: none">{{$post->body}}</li>
+        </div>
+        <br>
+    @endforeach
+</ul>
 
 @endsection

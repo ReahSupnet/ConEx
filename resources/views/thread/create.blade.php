@@ -24,12 +24,21 @@
 
 				<div class="form-group">
 					<label for="category"> Category </label>
-					<input type="text" class="form-control" name="category" id="" placeholder="Enter Category" value="{{old('category')}}">
+					<select class="form-control" name="category_id" id="" placeholder="Enter Category">
+						@foreach($categories as $category)
+							<option value="{{$category->id}}">{{$category->name}}</option>
+						@endforeach
+					</select>
 				</div>
 
 				<div class="form-group">
 					<label for="subject"> Subject </label>
-					<textarea type="textarea" class="form-control" name="subject" id="" placeholder="Enter Thread" rows="3" value="{{old('subject')}}"></textarea>
+					<textarea type="textarea" class="form-control" name="subject" id="" placeholder="Enter Thread" rows="1" value="{{old('subject')}}"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="body"> Body </label>
+					<textarea type="textarea" class="form-control" name="body" id="" placeholder="..." rows="5" value="{{old('subject')}}"></textarea>
 				</div>
 
 				<button type="submit" class="btn btn-primary">Submit</button>

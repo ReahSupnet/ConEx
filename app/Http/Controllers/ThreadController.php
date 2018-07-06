@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Thread;
+use App\Category;
+use App\Post;
 use Auth;
 
 class ThreadController extends Controller
@@ -32,7 +34,9 @@ class ThreadController extends Controller
      */
     public function create()
     {
-        return view( 'thread.create');
+        $categories = Category::all();
+
+        return view( 'thread.create')->with('categories', $categories);
     }
 
     /**
@@ -46,15 +50,28 @@ class ThreadController extends Controller
         //Validate
 
         $this->validate($request,[
+            'category_id' => 'required',
             'subject' => 'required|min:10'
         ]);
 
-        $params = $request->all();
-        $params['vote_up'] = 0;
-        $params['vote_down'] = 0;
+        //Create thread
+        $thread_params['category_id'] = $request->input('category_id');
+        $thread_params['subject'] = $request->input('subject');
+        $thread_params['vote_up'] = 0;
+        $thread_params['vote_down'] = 0;
+        $thread_params['status'] = Thread::STATUSES['open'];
+        $thread_params['user_id'] = 1; // TODO: Update me later
+        $thread = Thread::create($thread_params);
 
-        //Store
-        Thread::create($params);
+        //Create first post
+        $post_params = array();
+        $post_params['body'] = $request->input('body');
+        $post_params['user_id'] = 1; // TODO: Update me later
+        $post_params['status'] = Post::STATUSES['open'];
+        $post_params['vote_up'] = 0;
+        $post_params['vote_down'] = 0;
+        $post_params['thread_id'] = $thread->id;
+        Post::create($post_params);
 
 
         //Redirect
@@ -69,8 +86,10 @@ class ThreadController extends Controller
      */
     public function show($id)
     {
+        $thread = Thread::find($id);
+        $posts = $thread->posts;
 
-        return view('thread.show_thread')->with('thread', Thread::find($id));
+        return view('thread.show_thread')->with('thread', $thread)->with('posts', $posts);
     }
 
     /**
