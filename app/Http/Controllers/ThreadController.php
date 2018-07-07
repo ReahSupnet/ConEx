@@ -24,7 +24,8 @@ class ThreadController extends Controller
     public function index()
     {
         $threads = Thread::paginate(5);
-        return view('thread.index')->with('threads', $threads);
+        $categories = Category::all();
+        return view('thread.index')->with('threads', $threads)->with('categories', $categories);
     }
 
     /**
@@ -88,8 +89,9 @@ class ThreadController extends Controller
     {
         $thread = Thread::find($id);
         $posts = $thread->posts;
+        $categories = Category::all();
 
-        return view('thread.show_thread')->with('thread', $thread)->with('posts', $posts);
+        return view('thread.show_thread')->with('thread', $thread)->with('posts', $posts)->with('categories', $categories);
     }
 
     /**

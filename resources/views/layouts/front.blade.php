@@ -11,7 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script type="text/javascript" rel="script" src="{{asset('js/app.js')}}"></script>
+    {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -44,31 +46,23 @@
                 <div class="col-md-offset-6">
                     <button type="button" class="btn btn-primary btn-lg btn-block"><a href="{{route('thread.create')}}" style="color: white;">Create Thread</a></button>
                 </div>
-            @elseif ($action == 'create_post')
-                <div class="col-md-offset-6">
-                    <button type="button" class="btn btn-primary btn-lg btn-block"><a href="#" style="color: white;">Create Post</a></button>
-                </div>
             @endif
 
 
             <br>
 
             <h4>Category</h4>
-
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
                     <a  href="{{route('thread.index')}}"> All Thread </a>
                     <span class="badge badge-secondary badge-pill">14</span>
                 </li>
+            @foreach ($categories as $category)
                 <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
-                    <a  href="{{route('thread.index')}}"> PHP </a>
+                    <a  href="{{route('thread.index')}}"> {{$category->name}} </a>
                     <span class="badge badge-secondary  badge-pill">5</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
-                    <a  href="{{route('thread.index')}}"> Python </a>
-                    <span class="badge badge-secondary  badge-pill">9</span>
-                </li>
-            </ul>
+            @endforeach
 
             <br>
 
@@ -89,6 +83,12 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <!-- boostrap js -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'article-ckeditor' );
+</script>
+
 
 </body>
 </html>

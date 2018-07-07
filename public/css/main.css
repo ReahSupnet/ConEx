@@ -1,0 +1,9 @@
+.vl {
+    border-left: 5px solid green;
+    height: 100%;
+    width: 50%;
+    display: block;
+    float: left;
+
+}
+

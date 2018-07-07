@@ -13,7 +13,8 @@
 
  Route::get('/', function () {
      $threads = App\Thread::paginate(5);
-     return view('welcome')->with('threads', $threads);
+     $categories = App\Category::all();
+     return view('welcome')->with('threads', $threads)->with('categories', $categories);
  });
 
 
@@ -21,6 +22,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/thread', 'ThreadController');
+Route::resource('post', 'PostsController')->only(['store', 'edit', 'update', 'destroy']);
+
+Route::resource('thread', 'ThreadController');
 
 

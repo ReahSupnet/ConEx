@@ -38,7 +38,7 @@
 
 				<div class="form-group">
 					<label for="body"> Body </label>
-					<textarea type="textarea" class="form-control" name="body" id="" placeholder="..." rows="5" value="{{old('subject')}}"></textarea>
+					<textarea type="textarea" class="form-control" name="body" id="article-ckeditor" placeholder="..." rows="5" value="{{old('subject')}}"></textarea>
 				</div>
 
 				<button type="submit" class="btn btn-primary">Submit</button>
