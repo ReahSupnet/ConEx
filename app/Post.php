@@ -10,5 +10,5 @@ class Post extends Model
         'body', 'thread_id', 'user_id', 'status', 'vote_up', 'vote_down'
     ];
 
-    const STATUSES = array('open' => 0, 'blocked' => 1);
+    const STATUSES = array('open' => 0, 'blocked' => 1, 'deleted' => 2);
 }

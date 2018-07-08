@@ -18,4 +18,6 @@
         </div>
 
     @endforelse
+
+        {{ $threads->links() }}
 </table>

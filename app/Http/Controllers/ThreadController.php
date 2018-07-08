@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use App\Thread;
 use App\Category;
@@ -23,7 +25,7 @@ class ThreadController extends Controller
 
     public function index()
     {
-        $threads = Thread::paginate(5);
+        $threads = Thread::orderBy('created_at', 'desc')->paginate(10);
         $categories = Category::all();
         return view('thread.index')->with('threads', $threads)->with('categories', $categories);
     }
@@ -76,7 +78,7 @@ class ThreadController extends Controller
 
 
         //Redirect
-        return back()->withMessage("Thread created!");
+        return redirect()->route('thread.show', $thread)->withMessage("Thread created!");
     }
 
     /**
@@ -91,7 +93,7 @@ class ThreadController extends Controller
         $posts = $thread->posts;
         $categories = Category::all();
 
-        return view('thread.show_thread')->with('thread', $thread)->with('posts', $posts)->with('categories', $categories);
+        return view('thread.show')->with('thread', $thread)->with('posts', $posts)->with('categories', $categories);
     }
 
     /**
@@ -125,6 +127,6 @@ class ThreadController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

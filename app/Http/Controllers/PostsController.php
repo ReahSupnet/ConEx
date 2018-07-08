@@ -77,6 +77,9 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->status = Post::STATUSES['deleted'];
+        $post->save();
+
+        //return response()->json(['result' => 'OK']);
     }
 }

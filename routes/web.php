@@ -12,7 +12,8 @@
 */
 
  Route::get('/', function () {
-     $threads = App\Thread::paginate(5);
+
+     $threads = App\Thread::orderBy('created_at', 'desc')->paginate(10);
      $categories = App\Category::all();
      return view('welcome')->with('threads', $threads)->with('categories', $categories);
  });
@@ -24,6 +25,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('post', 'PostsController')->only(['store', 'edit', 'update', 'destroy']);
 
-Route::resource('thread', 'ThreadController');
+Route::resource('/thread', 'ThreadController');
 
 

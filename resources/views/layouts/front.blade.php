@@ -39,12 +39,11 @@
 
             @yield('content')
         </div>
-
         <div class="col-md-3 content-heading">
 
             @if ($action == 'index')
                 <div class="col-md-offset-6">
-                    <button type="button" class="btn btn-primary btn-lg btn-block"><a href="{{route('thread.create')}}" style="color: white;">Create Thread</a></button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" role="button" onclick="window.location.href ='{{route('thread.create')}}'">Create Thread</button>
                 </div>
             @endif
 
@@ -80,15 +79,16 @@
 
 
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+{{--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--}}
 <!-- boostrap js -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace( 'article-ckeditor' );
+    CKEDITOR.timestamp = +new Date;
 </script>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
 
 </body>
 </html>

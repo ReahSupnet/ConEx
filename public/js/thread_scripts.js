@@ -11,3 +11,16 @@ function hideEditSection(id) {
     $("#edit_post_" + id).hide();
     $("#create_post").show();
 }
+
+function confirmPostDelete(post_id, thread_id) {
+    if (confirm('Are you sure you want to delete this post?')) {
+        $.ajax({
+            dataType : 'json',
+            type : 'DELETE',
+            url : '/post/' + post_id,
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+        }).always(function() {
+            window.location.href = "/thread/" + thread_id;
+        });
+    };
+}
