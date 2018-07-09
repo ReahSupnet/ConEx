@@ -19,9 +19,9 @@
 <table class="table table-bordered">
     <tr class="row m-0 table-light">
         <td class="d-inline-block col-1" >{{$thread->vote_up}} - {{$thread->vote_down}}</td>
-        <td class="d-inline-block col-11"><a href="{{route('thread.show', $thread->id)}}"><h4 style="margin: -5px; color: black;"> {{$thread->subject}} </h4></a>
+        <td class="d-inline-block col-11"><h4 style="margin: -5px; color: black;"> {{$thread->subject}} </h4>
             <li class="row" style="list-style: none; margin:  10px -5px -5px -20px;">
-                <div class="d-inline-block col-5"> Created by: </div>
+                <div class="d-inline-block col-5"> Created by: {{$thread->user->name}}</div>
             </li>
             <li class="row" style="margin: 10px 0 -10px -20px;">
 
@@ -42,19 +42,22 @@
             <div class="list-group-item">
                 <div class="media">
                     <img class="align-self-start mr-3" src="http://placehold.jp/006699/cccc00/50x50.png" alt="Generic placeholder image">
-                    <div class="media-body" id="post_content_{{$post->id}}">
-                        @switch ($post->status)
-                            @case (Post::STATUSES['open'])
-                                <div style="font-size: 13px;">USERNAME wrote:</div> {{--TODO: make link direct to user account--}}
-                                <div>{!! ($post->body) !!}</div>
-                                @break
-                            @case (Post::STATUSES['blocked'])
-                                <div>This message has been blocked</div>
-                                @break
-                            @case (Post::STATUSES['deleted'])
-                                <div>This message has been deleted by USERNAME</div>
-                                @break
-                        @endswitch
+                    <div class="media-body">
+                         <div style="font-size: 13px;">{{$post->user->name}} wrote:</div>
+
+                        <div id="post_content_{{$post->id}}">
+                            @switch ($post->status)
+                                @case (Post::STATUSES['open'])
+                                    <div>{!! ($post->body) !!}</div>
+                                    @break
+                                @case (Post::STATUSES['blocked'])
+                                    <div>This message has been blocked</div>
+                                    @break
+                                @case (Post::STATUSES['deleted'])
+                                    <div>This message has been deleted by USERNAME</div>
+                                    @break
+                            @endswitch
+                         </div>
                     </div>
                 </div>
             </div>
@@ -64,14 +67,18 @@
 
                 <span class="d-inline-block col-2">Share</span>
                 <div class="pull-right" style="float: right;">
-                <button type="button" class=" btn btn-sm btn-success pull-right" onclick="showEditSection({{$post->id}})">Edit</button>
-                <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="confirmPostDelete({{$post->id}}, {{$thread->id}})">Delete</button>
+
+                @if (auth()->user() && $post->user->id == auth()->user()->id)
+                    <button type="button" class=" btn btn-sm btn-success pull-right" onclick="showEditSection({{$post->id}})">Edit</button>
+                    <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="confirmPostDelete({{$post->id}}, {{$thread->id}})">Delete</button>
+                @endif
+
                 </div>
             </div>
         </div>
 
         {{--Edit Post--}}
-        @if ($post->status == Post::STATUSES['open'])
+        @if (auth()->user() && $post->status == Post::STATUSES['open'] && $post->user->id == auth()->user()->id)
             <div class="list-group" id="edit_post_{{$post->id}}" style="display:none;">
                 <form class="form-vertical" action="{{route('post.update', ['id' => $post->id])}}" method="Post" role="form" id="create-thread-form">
                     {{csrf_field()}}
@@ -93,7 +100,7 @@
 
                                     <div class="pull-right" style="float:right; margin-top: 10px;">
                                         <button type="button" class="btn btn-danger btn-md" onclick="hideEditSection({{$post->id}})">Cancel</button>
-                                        <button type="submit" class="btn btn-info btn-md" >Update</button>
+                                        <button type="submit" class="btn btn-info btn-md">Update</button>
                                     </div>
                                 </div>
                             </div>
@@ -105,32 +112,34 @@
 
     @endforeach
 
-    <hr>
-    <div class="list-group" id="create_post">
-        <form class="form-vertical" action="{{route('thread.store')}}" method="Post" role="form" id="create-thread-form">
-            {{csrf_field()}}
-            <div class="list-group-item">
-                <div class="media">
-                    <img class="align-self-start mr-3" src="http://placehold.jp/006699/cccc00/50x50.png" alt="Generic placeholder image">
-                    <div class="media-body">
-                        <div class="form-group">
-                            <label for="body"> Post a Reply </label>
-
-                            <textarea type="textarea" class="form-control" name="body" id="article-ckeditor" placeholder="Enter message here" rows="3" value="{{old('body')}}" style="margin-top: 10px;"></textarea>
-
+    @if (auth()->user())
+        <hr>
+        <div class="list-group" id="create_post">
+            <form class="form-vertical" action="{{route('post.store')}}" method="Post" role="form" id="create-thread-form">
+                {{csrf_field()}}
+                <div class="list-group-item">
+                    <div class="media">
+                        <img class="align-self-start mr-3" src="http://placehold.jp/006699/cccc00/50x50.png" alt="Generic placeholder image">
+                        <div class="media-body">
                             <div class="form-group">
-                                <input type="hidden" value="{{$thread->id}}" name="thread-id">
-                            </div>
+                                <label for="body"> Post a Reply </label>
 
-                            <div class="pull-right" style="float:right; margin-top: 10px;">
-                                <button type="submit" class="btn btn-info btn-md" >Post</button>
+                                <textarea type="textarea" class="form-control" name="body" id="article-ckeditor" placeholder="Enter message here" rows="3" value="{{old('body')}}" style="margin-top: 10px;"></textarea>
+
+                                <div class="form-group">
+                                    <input type="hidden" value="{{$thread->id}}" name="thread-id">
+                                </div>
+
+                                <div class="pull-right" style="float:right; margin-top: 10px;">
+                                    <button type="submit" class="btn btn-info btn-md" >Post</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    @endif
 </ul>
 
 <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>

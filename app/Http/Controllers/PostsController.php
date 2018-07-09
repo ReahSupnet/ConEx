@@ -36,7 +36,7 @@ class PostsController extends Controller
         //Create Post
         $post_params = array();
         $post_params['body'] = $request->input('body');
-        $post_params['user_id'] = 1; // TODO: Update me later
+        $post_params['user_id'] = auth()->user()->id;
         $post_params['status'] = Post::STATUSES['open'];
         $post_params['vote_up'] = 0;
         $post_params['vote_down'] = 0;

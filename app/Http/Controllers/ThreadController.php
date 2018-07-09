@@ -18,14 +18,14 @@ class ThreadController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-//    public function __construct() {
-//        $this->middleware(['auth', 'clearance'])->except('index', 'show');
-//
-//    }
+    public function __construct() {
+        $this->middleware('auth',['except' => ['index', 'show'] ]);
+
+    }
 
     public function index()
     {
-        $threads = Thread::orderBy('created_at', 'desc')->paginate(10);
+        $threads = Thread::orderBy('created_at', 'desc')->paginate(3);
         $categories = Category::all();
         return view('thread.index')->with('threads', $threads)->with('categories', $categories);
     }
@@ -63,13 +63,13 @@ class ThreadController extends Controller
         $thread_params['vote_up'] = 0;
         $thread_params['vote_down'] = 0;
         $thread_params['status'] = Thread::STATUSES['open'];
-        $thread_params['user_id'] = 1; // TODO: Update me later
+        $thread_params['user_id'] = auth()->user()->id;
         $thread = Thread::create($thread_params);
 
         //Create first post
         $post_params = array();
         $post_params['body'] = $request->input('body');
-        $post_params['user_id'] = 1; // TODO: Update me later
+        $post_params['user_id'] = auth()->user()->id;
         $post_params['status'] = Post::STATUSES['open'];
         $post_params['vote_up'] = 0;
         $post_params['vote_down'] = 0;

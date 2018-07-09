@@ -11,4 +11,16 @@ class Post extends Model
     ];
 
     const STATUSES = array('open' => 0, 'blocked' => 1, 'deleted' => 2);
+
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function thread()
+    {
+        return $this->belongsTo('App\Thread');
+    }
+
 }

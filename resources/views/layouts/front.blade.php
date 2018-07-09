@@ -50,7 +50,7 @@
 
             <br>
 
-            <h4>Category</h4>
+            <h4>Forums</h4>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
                     <a  href="{{route('thread.index')}}"> All Thread </a>
