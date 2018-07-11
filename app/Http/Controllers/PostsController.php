@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Thread;
+use App\Reaction;
 
 use Illuminate\Http\Request;
 
@@ -81,5 +82,59 @@ class PostsController extends Controller
         $post->save();
 
         //return response()->json(['result' => 'OK']);
+    }
+
+    public function voteUp(Request $request, Post $post)
+    {
+        //Validate if row exists
+        $reactions = Reaction::where('target_id', $post->id)
+            ->where('user_id', auth()->user()->id)
+            ->where('target_type', 'post')->get();
+        $saved = false;
+
+        if (count($reactions) == 0)
+        {
+            $post->vote_up++;
+            $post->save();
+
+            $reaction_params = array();
+            $reaction_params['target_id'] = $post->id;
+            $reaction_params['user_id'] = auth()->user()->id;
+            $reaction_params['target_type'] = 'post';
+            $reaction_params['reaction'] = Reaction::REACTIONS['vote_up'];
+            Reaction::create($reaction_params);
+            $saved = true;
+        }
+
+        return response()->json([
+            'saved' => $saved
+        ]);
+    }
+
+    public function voteDown(Request $request, Post $post)
+    {
+        //Validate if row exists
+        $reactions = Reaction::where('target_id', $post->id)
+            ->where('user_id', auth()->user()->id)
+            ->where('target_type', 'post')->get();
+        $saved = false;
+
+        if (count($reactions) == 0)
+        {
+            $post->vote_down++;
+            $post->save();
+
+            $reaction_params = array();
+            $reaction_params['target_id'] = $post->id;
+            $reaction_params['user_id'] = auth()->user()->id;
+            $reaction_params['target_type'] = 'post';
+            $reaction_params['reaction'] = Reaction::REACTIONS['vote_down'];
+            Reaction::create($reaction_params);
+            $saved = true;
+        }
+
+        return response()->json([
+            'saved' => $saved
+        ]);
     }
 }

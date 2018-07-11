@@ -1,4 +1,3 @@
-<script src="{{ asset('js/thread_scripts.js') }}"></script>
 <?php use App\Post; ?>
 
 @extends('layouts.front', ['action' => 'create_post'])
@@ -12,7 +11,7 @@
 @endsection
 
 
-@section('heading', "Thread")
+@section('heading', "Posts")
 
 @section('content')
 
@@ -62,15 +61,24 @@
                 </div>
             </div>
             <div class="list-group-item bg-light" style="font-size: 14px;" >
-                <span class="d-inline-block col-2">vote-up &nbsp;&nbsp; vote-down</span>
+                <span class="d-inline-block col-4">
+                    <span class="badge badge-info" id="post_{{$post->id}}_up">{{$post->vote_up}}</span>&nbsp;&nbsp;
+                    <button type="button" class=" btn btn-sm btn-info pull-right" onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})">vote-up</button>&nbsp;&nbsp;
+                    <span class="badge badge-info" id="post_{{$post->id}}_down">{{$post->vote_down}}</span>&nbsp;&nbsp;
+                    <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown({{$post->id}}, {{auth()->user()->id}})">vote-down</button>
+                </span>
                 <span class="d-inline-block col-3">Posted on: {{$thread->created_at}}</span>
 
                 <span class="d-inline-block col-2">Share</span>
                 <div class="pull-right" style="float: right;">
 
-                @if (auth()->user() && $post->user->id == auth()->user()->id)
+
+                @if (auth()->user()->isAdmin())
+                        <button type="button" class=" btn btn-sm btn-success pull-right" onclick="showEditSection({{$post->id}})">Edit</button>
+                        <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="confirmPostDelete({{$post->id}}, {{$thread->id}})">Delete</button>
+                @elseif (auth()->user() && $post->user->id == auth()->user()->id)
                     <button type="button" class=" btn btn-sm btn-success pull-right" onclick="showEditSection({{$post->id}})">Edit</button>
-                    <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="confirmPostDelete({{$post->id}}, {{$thread->id}})">Delete</button>
+
                 @endif
 
                 </div>

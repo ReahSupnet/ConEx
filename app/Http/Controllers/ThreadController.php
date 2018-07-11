@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Thread;
 use App\Category;
 use App\Post;
+use App\Reaction;
 use Auth;
 
 class ThreadController extends Controller
@@ -23,11 +24,36 @@ class ThreadController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $threads = Thread::orderBy('created_at', 'desc')->paginate(3);
         $categories = Category::all();
-        return view('thread.index')->with('threads', $threads)->with('categories', $categories);
+
+        if ($request->input('categories'))
+        {
+            $threads = Thread::where('category_id', $request->input('categories'))->orderBy('created_at', 'desc')->paginate(10);
+        }
+        else
+        {
+            $threads = Thread::orderBy('created_at', 'desc')->paginate(10);
+        }
+
+        return view('thread.index')->with('threads', $threads)->with('categories', $categories)->with('my_posts', false);
+    }
+
+    public function myPosts(Request $request)
+    {
+        $categories = Category::all();
+
+        if ($request->input('categories'))
+        {
+            $threads = Thread::join('posts', 'threads.id', 'posts.thread_id')->select('threads.*', 'posts.user_id as post_user_id')->where('posts.user_id', auth()->user()->id)->where('category_id', $request->input('categories'))->paginate(10);
+        }
+        else
+        {
+            $threads = Thread::join('posts', 'threads.id', 'posts.thread_id')->select('threads.*', 'posts.user_id as post_user_id')->where('posts.user_id', auth()->user()->id)->paginate(10);
+        }
+
+        return view('thread.index')->with('threads', $threads)->with('categories', $categories)->with('my_posts', true);
     }
 
     /**
@@ -39,7 +65,7 @@ class ThreadController extends Controller
     {
         $categories = Category::all();
 
-        return view( 'thread.create')->with('categories', $categories);
+        return view( 'thread.create')->with('categories', $categories)->with('my_posts', false);;
     }
 
     /**
@@ -93,7 +119,7 @@ class ThreadController extends Controller
         $posts = $thread->posts;
         $categories = Category::all();
 
-        return view('thread.show')->with('thread', $thread)->with('posts', $posts)->with('categories', $categories);
+        return view('thread.show')->with('thread', $thread)->with('posts', $posts)->with('categories', $categories)->with('my_posts', false);
     }
 
     /**
@@ -128,5 +154,59 @@ class ThreadController extends Controller
     public function destroy($id)
     {
 
+    }
+
+    public function voteUp(Request $request, Thread $thread)
+    {
+        //Validate if row exists
+        $reactions = Reaction::where('target_id', $thread->id)
+            ->where('user_id', auth()->user()->id)
+            ->where('target_type', 'thread')->get();
+        $saved = false;
+
+        if (count($reactions) == 0)
+        {
+            $thread->vote_up++;
+            $thread->save();
+
+            $reaction_params = array();
+            $reaction_params['target_id'] = $thread->id;
+            $reaction_params['user_id'] = auth()->user()->id;
+            $reaction_params['target_type'] = 'thread';
+            $reaction_params['reaction'] = Reaction::REACTIONS['vote_up'];
+            Reaction::create($reaction_params);
+            $saved = true;
+        }
+
+        return response()->json([
+            'saved' => $saved
+        ]);
+    }
+
+    public function voteDown(Request $request, Thread $thread)
+    {
+        //Validate if row exists
+        $reactions = Reaction::where('target_id', $thread->id)
+            ->where('user_id', auth()->user()->id)
+            ->where('target_type', 'thread')->get();
+        $saved = false;
+
+        if (count($reactions) == 0)
+        {
+            $thread->vote_down++;
+            $thread->save();
+
+            $reaction_params = array();
+            $reaction_params['target_id'] = $thread->id;
+            $reaction_params['user_id'] = auth()->user()->id;
+            $reaction_params['target_type'] = 'thread';
+            $reaction_params['reaction'] = Reaction::REACTIONS['vote_down'];
+            Reaction::create($reaction_params);
+            $saved = true;
+        }
+
+        return response()->json([
+            'saved' => $saved
+        ]);
     }
 }

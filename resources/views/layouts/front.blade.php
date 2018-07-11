@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script type="text/javascript" rel="script" src="{{asset('js/app.js')}}"></script>
+    <script src="{{ asset('js/thread_scripts.js') }}"></script>
     {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
 
 
@@ -50,18 +51,7 @@
 
             <br>
 
-            <h4>Forums</h4>
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
-                    <a  href="{{route('thread.index')}}"> All Thread </a>
-                    <span class="badge badge-secondary badge-pill">14</span>
-                </li>
-            @foreach ($categories as $category)
-                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
-                    <a  href="{{route('thread.index')}}"> {{$category->name}} </a>
-                    <span class="badge badge-secondary  badge-pill">5</span>
-                </li>
-            @endforeach
+            @include('layouts.partials.categories')
 
             <br>
 

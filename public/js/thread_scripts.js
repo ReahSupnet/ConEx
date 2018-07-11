@@ -24,3 +24,67 @@ function confirmPostDelete(post_id, thread_id) {
         });
     };
 }
+
+function postVoteUp(post_id, user_id) {
+    $.ajax({
+        dataType : 'json',
+        type : 'PUT',
+        url : '/post/' + post_id + '/vote_up',
+        headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 'user_id' : user_id },
+        success: function(data){
+            if (data["saved"] == true) {
+                // Update count in UI
+                var count = parseInt($("#post_" + post_id + "_up").text());
+                $("#post_" + post_id + "_up").text(count + 1);
+            }
+        }
+    });
+}
+
+function postVoteDown(post_id, user_id) {
+    $.ajax({
+        dataType : 'json',
+        type : 'PUT',
+        url : '/post/' + post_id + '/vote_down',
+        headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 'user_id' : user_id },
+        success: function(data){
+            if (data["saved"] == true) {
+                // Update count in UI
+                var count = parseInt($("#post_" + post_id + "_down").text());
+                $("#post_" + post_id + "_down").text(count + 1);
+            }
+        }
+    });
+}
+
+function threadVoteUp(thread_id, user_id) {
+    $.ajax({
+        dataType : 'json',
+        type : 'PUT',
+        url : '/thread/' + thread_id + '/vote_up',
+        headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 'user_id' : user_id },
+        success: function(data){
+            if (data["saved"] == true) {
+                // Update count in UI
+                var count = parseInt($("#thread_" + thread_id + "_up").text());
+                $("#thread_" + thread_id + "_up").text(count + 1);
+            }
+        }
+    });
+}
+
+function threadVoteDown(thread_id, user_id) {
+    $.ajax({
+        dataType : 'json',
+        type : 'PUT',
+        url : '/thread/' + thread_id + '/vote_down',
+        headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 'user_id' : user_id },
+        success: function(data){
+            if (data["saved"] == true) {
+                // Update count in UI
+                var count = parseInt($("#thread_" + thread_id + "_down").text());
+                $("#thread_" + thread_id + "_down").text(count + 1);
+            }
+        }
+    });
+}
