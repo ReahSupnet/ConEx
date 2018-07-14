@@ -22,4 +22,14 @@ class Thread extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function postCount()
+    {
+        return count($this->posts);
+    }
+
+    public function __toString()
+    {
+        return "$this->id";
+    }
 }

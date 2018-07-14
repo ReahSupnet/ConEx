@@ -3,7 +3,7 @@
 @section('banner')
 	<div class="container-fluid">
 		<div class="jumbotron">
-			<h1>My Forums</h1>
+			<h1>ConEx</h1>
 		</div>
 	</div>
 @endsection

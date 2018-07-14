@@ -88,3 +88,16 @@ function threadVoteDown(thread_id, user_id) {
         }
     });
 }
+
+function confirmCategoryDelete(category_id) {
+    if (confirm('Are you sure you want to delete this category?')) {
+        $.ajax({
+            dataType : 'json',
+            type : 'DELETE',
+            url : '/category/' + category_id,
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+        }).always(function() {
+            window.location.href = "/thread";
+        });
+    };
+}

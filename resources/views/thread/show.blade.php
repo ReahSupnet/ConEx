@@ -19,17 +19,12 @@
     <tr class="row m-0 table-light">
         <td class="d-inline-block col-1" >{{$thread->vote_up}} - {{$thread->vote_down}}</td>
         <td class="d-inline-block col-11"><h4 style="margin: -5px; color: black;"> {{$thread->subject}} </h4>
-            <li class="row" style="list-style: none; margin:  10px -5px -5px -20px;">
-                <div class="d-inline-block col-5"> Created by: {{$thread->user->name}}</div>
-            </li>
             <li class="row" style="margin: 10px 0 -10px -20px;">
-
+                <div class="d-inline-block col-4"> Created by: {{$thread->user->name}}</div>
                 <div class="d-inline-block col-4">Date created: {{$thread->created_at}}</div>
-                <div class="d-inline-block offset-5 col-2">Comments
-                    <span class="badge badge-info">Info</span>
+                <div class="d-inline-block offset-2 col-2">Comments &nbsp;
+                    <span class="badge badge-pill badge-info" style="font-size: 15px">{{$thread->postCount()}}</span>
                 </div>
-                <div class="d-inline-block col-1">Share</div>
-
             </li>
         </td>
     </tr>
@@ -61,19 +56,24 @@
                 </div>
             </div>
             <div class="list-group-item bg-light" style="font-size: 14px;" >
-                <span class="d-inline-block col-4">
-                    <span class="badge badge-info" id="post_{{$post->id}}_up">{{$post->vote_up}}</span>&nbsp;&nbsp;
-                    <button type="button" class=" btn btn-sm btn-info pull-right" onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})">vote-up</button>&nbsp;&nbsp;
-                    <span class="badge badge-info" id="post_{{$post->id}}_down">{{$post->vote_down}}</span>&nbsp;&nbsp;
-                    <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown({{$post->id}}, {{auth()->user()->id}})">vote-down</button>
-                </span>
                 <span class="d-inline-block col-3">Posted on: {{$thread->created_at}}</span>
+                <span class="d-inline-block offset-2 col-4">
+                    <span class="badge badge-info" id="post_{{$post->id}}_up">{{$post->vote_up}}</span>&nbsp;&nbsp;
+                    @if(auth()->user())
+                        <button type="button" class=" btn btn-sm btn-info pull-right" onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})">vote-up</button>&nbsp;
+                    @endif
+                    &nbsp;
+                    <span class="badge badge-info" id="post_{{$post->id}}_down">{{$post->vote_down}}</span>&nbsp;&nbsp;
+                    @if(auth()->user())
+                        <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown({{$post->id}}, {{auth()->user()->id}})">vote-down</button>
+                    @endif
+                </span>
 
-                <span class="d-inline-block col-2">Share</span>
+
                 <div class="pull-right" style="float: right;">
 
 
-                @if (auth()->user()->isAdmin())
+                @if (auth()->user() && auth()->user()->isAdmin())
                         <button type="button" class=" btn btn-sm btn-success pull-right" onclick="showEditSection({{$post->id}})">Edit</button>
                         <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="confirmPostDelete({{$post->id}}, {{$thread->id}})">Delete</button>
                 @elseif (auth()->user() && $post->user->id == auth()->user()->id)
@@ -118,6 +118,7 @@
             </div>
         @endif
 
+        <br>
     @endforeach
 
     @if (auth()->user())

@@ -46,12 +46,14 @@ class ThreadController extends Controller
 
         if ($request->input('categories'))
         {
-            $threads = Thread::join('posts', 'threads.id', 'posts.thread_id')->select('threads.*', 'posts.user_id as post_user_id')->where('posts.user_id', auth()->user()->id)->where('category_id', $request->input('categories'))->paginate(10);
+            $threads = Thread::join('posts', 'threads.id', 'posts.thread_id')->select('threads.*', 'posts.user_id as post_user_id')->where('posts.user_id', auth()->user()->id)->where('category_id', $request->input('categories'))->distinct('threads.id')->paginate(10);
         }
         else
         {
-            $threads = Thread::join('posts', 'threads.id', 'posts.thread_id')->select('threads.*', 'posts.user_id as post_user_id')->where('posts.user_id', auth()->user()->id)->paginate(10);
+            $threads = Thread::join('posts', 'threads.id', 'posts.thread_id')->select('threads.*', 'posts.user_id as post_user_id')->where('posts.user_id', auth()->user()->id)->distinct('threads.id')->paginate(10);
         }
+
+
 
         return view('thread.index')->with('threads', $threads)->with('categories', $categories)->with('my_posts', true);
     }

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'ConEx') }}</title>
 
     <!-- Scripts -->
     <script type="text/javascript" rel="script" src="{{asset('js/app.js')}}"></script>
@@ -40,7 +40,28 @@
 
             @yield('content')
         </div>
+
         <div class="col-md-3 content-heading">
+            @if(auth()->user() && !(auth()->user()->isAdmin()))
+                <div class="card border-primary">
+                    <div class="container" align="center" style="padding:20px;">
+                        <img src="https://placeimg.com/200/200/nature" alt="" style="border: 2px solid black; width:200px; heigh:200px; border-radius:50%;">
+                    </div>
+                    <div class="container">
+                        <h4>Welcome back, <strong>{{auth()->user()->name}}</strong>!</h4>
+                        <p> You have participated in ____ Threads </p>
+                        <p> Created _____ posts </p>
+                        <p> _____ Likes and _____ Dislikes</p>
+                    </div>
+                    {{--{{auth()->user()->postsCount()}}--}}
+                </div>
+            @endif
+
+            @if((auth()->user()->isAdmin()))
+                @include('admin.partials.adminCategory')
+            @endif
+
+            <br>
 
             @if ($action == 'index')
                 <div class="col-md-offset-6">
@@ -49,20 +70,13 @@
             @endif
 
 
+            <br>@include('layouts.partials.categories')
             <br>
+                @include('layouts.partials.ads')
 
-            @include('layouts.partials.categories')
 
-            <br>
 
-            <div class="card border-primary mb-3" style="max-width: 20rem;">
-                <div class="card-header">Header</div>
 
-                <div class="card-body">
-                    <h4 class="card-title">Primary card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -79,6 +93,25 @@
 </script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+
+<script>
+$(document).on('click', '.social-share', function(event){
+event.preventDefault();
+
+var vPosition = Math.floor(($(window).width() - popupMeta.width) / 2),
+hPosition = Math.floor(($(window).height() - popupMeta.height) / 2);
+
+var url = $(this).attr('href');
+var popup = window.open(url, 'Social Share',
+'width='+popupMeta.width+',height='+popupMeta.height+
+',left='+vpPsition+',top='+hPosition+
+',location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1');
+
+if (popup) {
+popup.focus();
+return false;
+}
+});</script>
 
 </body>
 </html>

@@ -30,6 +30,8 @@ Route::get('/home', 'ThreadController@index');
 
 Route::resource('/post', 'PostsController')->only(['store', 'edit', 'update', 'destroy']);
 
+Route::resource('/category', 'CategoryController')->only(['store', 'destroy']);
+
 Route::resource('/thread', 'ThreadController');
 
 // Vote endpoints
@@ -37,4 +39,10 @@ Route::put('/post/{post}/vote_up', 'PostsController@voteUp');
 Route::put('/post/{post}/vote_down', 'PostsController@voteDown');
 Route::put('/thread/{thread}/vote_up', 'ThreadController@voteUp');
 Route::put('/thread/{thread}/vote_down', 'ThreadController@voteDown');
+
+Route::resource('/user', 'UserController')->only(['store', 'index', 'show', 'destroy']);
+Route::get('/admin', 'UserController@admin');
+
+
+
 
