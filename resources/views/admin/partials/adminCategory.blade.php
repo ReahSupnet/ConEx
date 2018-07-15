@@ -1,3 +1,9 @@
+@php
+    use App\Category;
+
+    $categories = Category::all();
+@endphp
+
 @if(auth()->user() && auth()->user()->isAdmin())
     <ul class="list-group">
         <div class="form-group card-header text-white bg-primary">

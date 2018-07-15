@@ -20,10 +20,9 @@ class UserController extends Controller
     public function index()
     {
         $threads = Thread::orderBy('created_at', 'desc')->paginate(10);
-        $categories = Category::all();
         $users = User::all();
 
-        return view('admin.index')->with('threads', $threads)->with('categories', $categories)->with('users', $users)->with('my_posts', false);
+        return view('admin.index')->with('threads', $threads)->with('users', $users)->with('my_posts', false);
     }
 
     /**
@@ -53,9 +52,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $threads = Thread::where('user_id', $user->id)->paginate(10);
+        $categories = Category::all();
+
+        return view('user.show')->with('user', $user)->with('threads', $threads)->with('categories', $categories)->with('my_posts', false);
     }
 
     /**
@@ -97,8 +99,7 @@ class UserController extends Controller
     public function admin()
     {
         $users = User::all();
-        $categories = Category::all();
 
-        return view('admin.index')->with('users', $users)->with('categories', $categories)->with('my_posts', false);
+        return view('admin.index')->with('users', $users)->with('my_posts', false);
     }
 }

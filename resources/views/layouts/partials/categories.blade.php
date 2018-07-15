@@ -1,5 +1,10 @@
 
 <h4>Forums</h4>
+@php
+    use App\Category;
+
+    $categories = Category::all();
+@endphp
 
 <ul class="list-group">
     <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">

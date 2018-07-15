@@ -25,15 +25,17 @@ class ThreadController extends Controller
 
     public function index(Request $request)
     {
-        $categories = Category::all();
-
         if (auth()->user() && auth()->user()->isBanned())
         {
             auth()->logout();
             return redirect('/')->with('message', 'Your account has been banned');
         }
 
-        if ($request->input('categories'))
+        if ($request->input('search'))
+        {
+            $threads = Thread::where('subject' , 'like' , '%' . $request->input('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+        }
+        elseif ($request->input('categories'))
         {
             $threads = Thread::where('category_id', $request->input('categories'))->orderBy('created_at', 'desc')->paginate(10);
         }
@@ -42,13 +44,11 @@ class ThreadController extends Controller
             $threads = Thread::orderBy('created_at', 'desc')->paginate(10);
         }
 
-        return view('thread.index')->with('threads', $threads)->with('categories', $categories)->with('my_posts', false);
+        return view('thread.index')->with('threads', $threads)->with('my_posts', false);
     }
 
     public function myPosts(Request $request)
     {
-        $categories = Category::all();
-
         if ($request->input('categories'))
         {
             $threads = Thread::join('posts', 'threads.id', 'posts.thread_id')->select('threads.*', 'posts.user_id as post_user_id')->where('posts.user_id', auth()->user()->id)->where('category_id', $request->input('categories'))->distinct('threads.id')->paginate(10);
@@ -60,7 +60,7 @@ class ThreadController extends Controller
 
 
 
-        return view('thread.index')->with('threads', $threads)->with('categories', $categories)->with('my_posts', true);
+        return view('thread.index')->with('threads', $threads)->with('my_posts', true);
     }
 
     /**
@@ -117,16 +117,17 @@ class ThreadController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Request $request
+     * @param  Thread $thread
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, Thread $thread)
     {
-        $thread = Thread::find($id);
-        $posts = $thread->posts;
-        $categories = Category::all();
+        $sort_key = $request->input('sort_key') ? $request->input('sort_key') : 'created_at';
+        $sort_order = $request->input('sort_order') ? $request->input('sort_order') : 'asc';
+        $posts = $thread->posts()->orderBy($sort_key, $sort_order)->get();
 
-        return view('thread.show')->with('thread', $thread)->with('posts', $posts)->with('categories', $categories)->with('my_posts', false);
+        return view('thread.show')->with('thread', $thread)->with('posts', $posts)->with('my_posts', false);
     }
 
     /**

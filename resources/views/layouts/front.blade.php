@@ -19,7 +19,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/united/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
@@ -44,6 +44,18 @@
         </div>
 
         <div class="col-md-3 content-heading">
+            @php
+                use App\Reaction;
+
+                if(auth()->user())
+                {
+                    $total_threads = count(auth()->user()->threads);
+                    $total_posts = count(auth()->user()->posts);
+                    $total_likes = count(auth()->user()->reactions()->where('reaction', Reaction::REACTIONS['vote_up'])->get());
+                    $total_dislikes = count(auth()->user()->reactions()->where('reaction', Reaction::REACTIONS['vote_down'])->get());
+                }
+            @endphp
+
             @if(auth()->user() && !(auth()->user()->isAdmin()))
                 <div class="card border-primary">
                     <div class="container" align="center" style="padding:20px;">
@@ -51,15 +63,26 @@
                     </div>
                     <div class="container">
                         <h4>Welcome back, <strong>{{auth()->user()->name}}</strong>!</h4>
-                        <p> You have participated in ____ Threads </p>
-                        <p> Created _____ posts </p>
-                        <p> _____ Likes and _____ Dislikes</p>
+                        <p> You have participated in {{$total_threads}} Threads </p>
+                        <p> Created {{$total_posts}} posts </p>
+                        <p> Liked Threads and Posts {{$total_likes}}  </p>
+                        <p> Disliked Threads and Posts {{$total_dislikes}} </p>
                     </div>
                     {{--{{auth()->user()->postsCount()}}--}}
                 </div>
             @endif
 
             <br>
+
+                <form class="input-group custom-search-form" action="{{route('thread.index')}}" method="GET">
+                    <input type="text" class="form-control" name="search" placeholder="Search Threads">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info-sm" type="submit">
+                            {{--<i class="fa fa-search"></i>--}}submit
+                        </button>
+                    </span>
+                </form>
+                <br>
 
             @if ($action == 'index' || $action == 'create_post')
                 <div class="col-md-offset-6">

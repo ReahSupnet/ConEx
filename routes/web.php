@@ -11,13 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//
-//     $threads = App\Thread::orderBy('created_at', 'desc')->paginate(3);
-//     $categories = App\Category::all();
-//     return view('welcome')->with('threads', $threads)->with('categories', $categories);
-// });
-
 
 Auth::routes();
 

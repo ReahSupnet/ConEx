@@ -29,6 +29,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function threads()
+    {
+        return $this->hasMany('App\Thread');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
+    public function reactions()
+    {
+        return $this->hasMany('App\Reaction');
+    }
+
     public function isAdmin()
     {
         return $this->role == User::ROLES['admin'];
@@ -47,5 +62,15 @@ class User extends Authenticatable
     public function isBanned()
     {
         return $this->status == User::STATUSES['banned'];
+    }
+
+    public function getGravatarUrl()
+    {
+        return "https://www.gravatar.com/avatar/" . md5($this->email);
+    }
+
+    public function printNameWithLink()
+    {
+        return "<a href='" . "/user/" . $this->id . "'>" . $this->name . "</a>";
     }
 }

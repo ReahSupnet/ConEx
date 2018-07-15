@@ -5,25 +5,30 @@
 @section('banner')
     <div class="container-fluid">
         <div class="jumbotron">
-            <h1>My Forums</h1>
+            <h1>ConEx</h1>
         </div>
     </div>
 @endsection
 
 
 @section('heading', "Posts")
+<a href="/thread/{{$thread->id}}?sort_key=created_at&sort_order=desc">Newest first</a>
+<a href="/thread/{{$thread->id}}?sort_key=created_at&sort_order=asc">Oldest first</a>
+<a href="/thread/{{$thread->id}}?sort_key=vote_up&sort_order=desc">Most liked first</a>
 
 @section('content')
 
 <table class="table table-bordered">
     <tr class="row m-0 table-light">
-        <td class="d-inline-block col-1" >{{$thread->vote_up}} - {{$thread->vote_down}}</td>
+        <td class="d-inline-block col-1" >
+            <div class="badge badge-pill badge-success" >{{$thread->vote_up}}</div>
+            <div class="badge badge-pill badge-danger" >{{$thread->vote_down}}</div>
         <td class="d-inline-block col-11"><h4 style="margin: -5px; color: black;"> {{$thread->subject}} </h4>
             <li class="row" style="margin: 10px 0 -10px -20px;">
                 <div class="d-inline-block col-4"> Posted by: {{$thread->user->name}}</div>
                 <div class="d-inline-block col-4"> {{$thread->created_at->diffForHumans()}}</div>
                 <div class="d-inline-block offset-2 col-2">Comments &nbsp;
-                    <span class="badge badge-pill badge-info" style="font-size: 15px">{{$thread->postCount()}}</span>
+                    <span class="badge badge-pill badge-primary">{{$thread->postCount()}}</span>
                 </div>
             </li>
         </td>
@@ -35,7 +40,7 @@
         <div class="list-group" id="actual_post_{{$post->id}}">
             <div class="list-group-item">
                 <div class="media">
-                    <img class="align-self-start mr-3" src="http://placehold.jp/006699/cccc00/50x50.png" alt="Generic placeholder image">
+                    <img class="align-self-start mr-3" src="{{$post->user->getGravatarUrl()}}" alt="Generic placeholder image">
                     <div class="media-body">
                          <div style="font-size: 13px;">{{$post->user->name}} wrote:</div>
 
@@ -58,12 +63,12 @@
             <div class="list-group-item bg-light" style="font-size: 14px;" >
                 <span class="d-inline-block col-3"> {{$thread->created_at->diffForHumans()}}</span>
                 <span class="d-inline-block offset-2 col-4">
-                    <span class="badge badge-info" id="post_{{$post->id}}_up">{{$post->vote_up}}</span>&nbsp;&nbsp;
+                    <span class="badge badge-success" id="post_{{$post->id}}_up">{{$post->vote_up}}</span>&nbsp;&nbsp;
                     @if(auth()->user())
-                        <button type="button" class=" btn btn-sm btn-info pull-right" onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})">vote-up</button>&nbsp;
+                        <button type="button" class=" btn btn-sm btn-success pull-right" onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})">vote-up</button>&nbsp;
                     @endif
                     &nbsp;
-                    <span class="badge badge-info" id="post_{{$post->id}}_down">{{$post->vote_down}}</span>&nbsp;&nbsp;
+                    <span class="badge badge-danger" id="post_{{$post->id}}_down">{{$post->vote_down}}</span>&nbsp;&nbsp;
                     @if(auth()->user())
                         <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown({{$post->id}}, {{auth()->user()->id}})">vote-down</button>
                     @endif
@@ -74,10 +79,10 @@
 
 
                 @if (auth()->user() && auth()->user()->isAdmin())
-                        <button type="button" class=" btn btn-sm btn-success pull-right" onclick="showEditSection({{$post->id}})">Edit</button>
-                        <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="confirmPostDelete({{$post->id}}, {{$thread->id}})">Delete</button>
+                        <button type="button" class=" btn btn-sm btn-success pull-right" onclick="showEditSection({{$post->id}})">Update</button>
+                        <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="confirmPostDelete({{$post->id}}, {{$thread->id}})">Block</button>
                 @elseif (auth()->user() && $post->user->id == auth()->user()->id)
-                    <button type="button" class=" btn btn-sm btn-success pull-right" onclick="showEditSection({{$post->id}})">Edit</button>
+                    <button type="button" class=" btn btn-sm btn-primary pull-right" onclick="showEditSection({{$post->id}})">Update</button>
 
                 @endif
 
@@ -92,7 +97,7 @@
                     {{csrf_field()}}
                     <div class="list-group-item">
                         <div class="media">
-                            <img class="align-self-start mr-3" src="http://placehold.jp/006699/cccc00/50x50.png" alt="Generic placeholder image">
+                            <img class="align-self-start mr-3" src="{{$post->user->getGravatarUrl()}}" alt="Generic placeholder image">
                             <div class="media-body">
                                 <div class="form-group">
                                     <label for="body"> Edit Post </label>
@@ -128,7 +133,7 @@
                 {{csrf_field()}}
                 <div class="list-group-item">
                     <div class="media">
-                        <img class="align-self-start mr-3" src="http://placehold.jp/006699/cccc00/50x50.png" alt="Generic placeholder image">
+                        <img class="align-self-start mr-3" src="{{auth()->user()->getGravatarUrl()}}" alt="Generic placeholder image">
                         <div class="media-body">
                             <div class="form-group">
                                 <label for="body"> Post a Reply </label>
@@ -140,7 +145,7 @@
                                 </div>
 
                                 <div class="pull-right" style="float:right; margin-top: 10px;">
-                                    <button type="submit" class="btn btn-info btn-md" >Post</button>
+                                    <button type="submit" class="btn btn-primary btn-md" >Post</button>
                                 </div>
                             </div>
                         </div>
