@@ -1,9 +1,9 @@
 @extends('layouts.front', ['action' => 'index'])
 
 @section('banner')
-	<div class="container-fluid">
+	<div class="container-fluid" >
 		<div class="jumbotron">
-			<h1>ConEx</h1>
+			<h1 style="font-size:4em;">ConEx</h1>
 		</div>
 	</div>
 @endsection

@@ -12,21 +12,28 @@
                         <div class="d-inline-block col-3"> {{$thread->created_at->diffForHumans()}}</div>
 
                         <div class="d-inline-block col-3">
+
                             @if(auth()->user())
-                                <button type="button" class=" btn btn-sm btn-success pull-right" onclick="threadVoteUp({{$thread->id}}, {{auth()->user()->id}})">G</button>
+                                <button type="button" class=" btn btn-sm btn-success pull-right" onclick="threadVoteUp({{$thread->id}}, {{auth()->user()->id}})">vote-up</button>
+                            @elseif(!(auth()->user()))
+                                <button type="button" class=" btn btn-sm btn-success pull-right" >vote-up</button>
                             @endif
-                            <span class="badge badge-success" id="thread_{{$thread->id}}_up">{{$thread->vote_up}}</span>
+                               <span class="badge badge-success" id="thread_{{$thread->id}}_up">{{$thread->vote_up}}</span>
+                             | <span class="badge badge-danger" id="thread_{{$thread->id}}_down">{{$thread->vote_down}}</span>
+
                             @if(auth()->user())
-                                <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="threadVoteDown({{$thread->id}}, {{auth()->user()->id}})">NG</button>
+                                <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="threadVoteDown({{$thread->id}}, {{auth()->user()->id}})">vote-down</button>
+                            @elseif (!(auth()->user()))
+                                <button type="button" class=" btn btn-sm btn-danger pull-right" >vote-down</button>
                             @endif
-                            <span class="badge badge-danger" id="thread_{{$thread->id}}_down">{{$thread->vote_down}}</span>
+
                         </div>
 
                         <div class="d-inline-block col-2">Comments
                             <span class="badge badge-primary">{{$thread->postCount()}}</span>
                         </div>
 
-                        <div class="d-inline-block col-2"><a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}"
+                        <div class="d-inline-block col-1"><a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}"
                             target="_blank" role="button" class="btn btn-primary btn-sm">
                             Share on Fb
                             </a></div>

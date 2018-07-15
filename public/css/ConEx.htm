@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="9uNdb148gO92W7d9tF09WRHTSZAmNvA7JGKdPEXq">
+
+    <title>ConEx</title>
+
+    <!-- Scripts -->
+    <script type="text/javascript" rel="script" src="http://127.0.0.1:8000/js/app.js"></script>
+    <script src="http://127.0.0.1:8000/js/thread_scripts.js"></script>
+    
+
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
+
+    <!-- Styles -->
+    <link href="http://127.0.0.1:8000/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="http://127.0.0.1:8000">
+            ConEx
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ml-auto nav-pills">
+                <!-- Authentication Links -->
+                
+                                            <li class="nav-item">
+                            <a class="nav-link" href="http://127.0.0.1:8000/my_posts"> My Account</a>
+                        </li>
+                                        
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                           Hi, lew <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/logout"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+
+                            <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST" style="display: none;">
+                                <input type="hidden" name="_token" value="9uNdb148gO92W7d9tF09WRHTSZAmNvA7JGKdPEXq">                            </form>
+                        </div>
+                    </li>
+                            </ul>
+        </div>
+    </div>
+</nav>
+
+<br>
+
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1>ConEx</h1>
+        </div>
+    </div>
+
+
+<div  class="container-fluid" id="app">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <div class="d-inline-block col-md-2">
+                    <h4 class="main-content-heading">Posts</h4>
+                </div>
+
+                                <div class="d-inline-block offset-8 col-md-2">
+                    
+    <div class="nav-item dropdown">
+        <button class="nav-link dropdown-toggle btn btn-primary btn-sm pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size: 14px; margin-bottom: 10px;">Sort by</button>
+        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
+            <a class="dropdown-item" href="/thread/29?sort_key=created_at&sort_order=desc">Newest first</a>
+            <a class="dropdown-item" href="/thread/29?sort_key=created_at&sort_order=asc">Oldest first</a>
+            <a class="dropdown-item" href="/thread/29?sort_key=vote_up&sort_order=desc">Most liked first</a>
+        </div>
+    </div>
+                </div>
+                            </div>
+
+
+            
+            
+<table class="table table-bordered">
+    <tr class="row m-0 table-light">
+        <td class="d-inline-block col-1" >
+            <div class="badge badge-pill badge-success" >0</div>
+            <div class="badge badge-pill badge-danger" >2</div>
+        <td class="d-inline-block col-11"><h4 style="margin: -5px; color: black;"> What is you favorite mid-night snack? </h4>
+            <li class="row" style="margin: 10px 0 -10px -20px;">
+                <div class="d-inline-block col-4"> Posted by: lew</div>
+                <div class="d-inline-block col-4"> 4 days ago</div>
+                <div class="d-inline-block offset-2 col-2">Comments &nbsp;
+                    <span class="badge badge-pill badge-primary">4</span>
+                </div>
+            </li>
+        </td>
+    </tr>
+</table>
+
+<ul>
+            <div class="list-group" id="actual_post_38">
+            <div class="list-group-item">
+                <div class="media">
+                    <img class="align-self-start mr-3" src="https://www.gravatar.com/avatar/59235f35e4763abb0b547bd093562f6e" alt="Generic placeholder image">
+                    <div class="media-body">
+                         <div style="font-size: 13px;">admin wrote:</div>
+
+                        <div id="post_content_38">
+                                                                <div><p>Sleep and video games</p></div>
+                                                             </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group-item bg-light" style="font-size: 14px;" >
+                <span class="d-inline-block col-3"> 4 days ago</span>
+                <span class="d-inline-block offset-2 col-4">
+                    <span class="badge badge-success" id="post_38_up">1</span>&nbsp;&nbsp;
+                                            <button type="button" class=" btn btn-sm btn-success pull-right" onclick="postVoteUp(38, 2)">vote-up</button>&nbsp;
+                                        &nbsp;
+                    <span class="badge badge-danger" id="post_38_down">0</span>&nbsp;&nbsp;
+                                            <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown(38, 2)">vote-down</button>
+                                    </span>
+
+
+                <div class="pull-right" style="float: right;">
+
+
+                
+                </div>
+            </div>
+        </div>
+
+        
+        
+        <br>
+            <div class="list-group" id="actual_post_37">
+            <div class="list-group-item">
+                <div class="media">
+                    <img class="align-self-start mr-3" src="https://www.gravatar.com/avatar/3a8ce62ad56b29dfba33732e3337f58f" alt="Generic placeholder image">
+                    <div class="media-body">
+                         <div style="font-size: 13px;">lew wrote:</div>
+
+                        <div id="post_content_37">
+                                                                <div><p>Avocado sandwich and kape</p></div>
+                                                             </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group-item bg-light" style="font-size: 14px;" >
+                <span class="d-inline-block col-3"> 4 days ago</span>
+                <span class="d-inline-block offset-2 col-4">
+                    <span class="badge badge-success" id="post_37_up">0</span>&nbsp;&nbsp;
+                                            <button type="button" class=" btn btn-sm btn-success pull-right" onclick="postVoteUp(37, 2)">vote-up</button>&nbsp;
+                                        &nbsp;
+                    <span class="badge badge-danger" id="post_37_down">1</span>&nbsp;&nbsp;
+                                            <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown(37, 2)">vote-down</button>
+                                    </span>
+
+
+                <div class="pull-right" style="float: right;">
+
+
+                                    <button type="button" class=" btn btn-sm btn-primary pull-right" onclick="showEditSection(37)">Update</button>
+
+                
+                </div>
+            </div>
+        </div>
+
+        
+                    <div class="list-group" id="edit_post_37" style="display:none;">
+                <form class="form-vertical" action="http://127.0.0.1:8000/post/37" method="Post" role="form" id="create-thread-form">
+                    <input type="hidden" name="_token" value="9uNdb148gO92W7d9tF09WRHTSZAmNvA7JGKdPEXq">
+                    <div class="list-group-item">
+                        <div class="media">
+                            <img class="align-self-start mr-3" src="https://www.gravatar.com/avatar/3a8ce62ad56b29dfba33732e3337f58f" alt="Generic placeholder image">
+                            <div class="media-body">
+                                <div class="form-group">
+                                    <label for="body"> Edit Post </label>
+
+                                    <textarea type="textarea" class="form-control" name="body" id="article-ckeditor_37" placeholder="Enter message here" rows="3" value="&lt;p&gt;Avocado sandwich and kape&lt;/p&gt;" style="margin-top: 10px;"></textarea>
+
+                                    <div class="form-group">
+                                        <input type="hidden" value="29" name="thread-id">
+                                    </div>
+
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input type="hidden" name="_token" value="9uNdb148gO92W7d9tF09WRHTSZAmNvA7JGKdPEXq">
+
+                                    <div class="pull-right" style="float:right; margin-top: 10px;">
+                                        <button type="button" class="btn btn-danger btn-md" onclick="hideEditSection(37)">Cancel</button>
+                                        <button type="submit" class="btn btn-info btn-md">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+        <br>
+            <div class="list-group" id="actual_post_39">
+            <div class="list-group-item">
+                <div class="media">
+                    <img class="align-self-start mr-3" src="https://www.gravatar.com/avatar/374cae316337871bd08ebb3ff57dbd23" alt="Generic placeholder image">
+                    <div class="media-body">
+                         <div style="font-size: 13px;">reah wrote:</div>
+
+                        <div id="post_content_39">
+                                                                <div><p><img alt="" src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=650&amp;w=940" style="height:300px; width:491px" />&nbsp;</p>
+
+<p>I like to eat pancakes before going to bed.</p>
+
+<p>&nbsp;</p></div>
+                                                             </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group-item bg-light" style="font-size: 14px;" >
+                <span class="d-inline-block col-3"> 4 days ago</span>
+                <span class="d-inline-block offset-2 col-4">
+                    <span class="badge badge-success" id="post_39_up">0</span>&nbsp;&nbsp;
+                                            <button type="button" class=" btn btn-sm btn-success pull-right" onclick="postVoteUp(39, 2)">vote-up</button>&nbsp;
+                                        &nbsp;
+                    <span class="badge badge-danger" id="post_39_down">0</span>&nbsp;&nbsp;
+                                            <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown(39, 2)">vote-down</button>
+                                    </span>
+
+
+                <div class="pull-right" style="float: right;">
+
+
+                
+                </div>
+            </div>
+        </div>
+
+        
+        
+        <br>
+            <div class="list-group" id="actual_post_40">
+            <div class="list-group-item">
+                <div class="media">
+                    <img class="align-self-start mr-3" src="https://www.gravatar.com/avatar/1aedfd0a740a61d7b022b260651e2680" alt="Generic placeholder image">
+                    <div class="media-body">
+                         <div style="font-size: 13px;">dummy wrote:</div>
+
+                        <div id="post_content_40">
+                                                                <div><p>hello there!!!!!</p></div>
+                                                             </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group-item bg-light" style="font-size: 14px;" >
+                <span class="d-inline-block col-3"> 4 days ago</span>
+                <span class="d-inline-block offset-2 col-4">
+                    <span class="badge badge-success" id="post_40_up">0</span>&nbsp;&nbsp;
+                                            <button type="button" class=" btn btn-sm btn-success pull-right" onclick="postVoteUp(40, 2)">vote-up</button>&nbsp;
+                                        &nbsp;
+                    <span class="badge badge-danger" id="post_40_down">0</span>&nbsp;&nbsp;
+                                            <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown(40, 2)">vote-down</button>
+                                    </span>
+
+
+                <div class="pull-right" style="float: right;">
+
+
+                
+                </div>
+            </div>
+        </div>
+
+        
+        
+        <br>
+    
+            <hr>
+        <div class="list-group" id="create_post">
+            <form class="form-vertical" action="http://127.0.0.1:8000/post" method="Post" role="form" id="create-thread-form">
+                <input type="hidden" name="_token" value="9uNdb148gO92W7d9tF09WRHTSZAmNvA7JGKdPEXq">
+                <div class="list-group-item">
+                    <div class="media">
+                        <img class="align-self-start mr-3" src="https://www.gravatar.com/avatar/3a8ce62ad56b29dfba33732e3337f58f" alt="Generic placeholder image">
+                        <div class="media-body">
+                            <div class="form-group">
+                                <label for="body"> Post a Reply </label>
+
+                                <textarea type="textarea" class="form-control" name="body" id="article-ckeditor" placeholder="Enter message here" rows="3" value="" style="margin-top: 10px;"></textarea>
+
+                                <div class="form-group">
+                                    <input type="hidden" value="29" name="thread-id">
+                                </div>
+
+                                <div class="pull-right" style="float:right; margin-top: 10px;">
+                                    <button type="submit" class="btn btn-primary btn-md" >Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ul>
+
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<script> CKEDITOR.replace( 'article-ckeditor' ); </script>
+
+        </div>
+
+        <div class="col-md-3 content-heading">
+            
+                            <div class="card border-primary">
+                    <div class="container" align="center" style="padding:20px;">
+                        <img src="https://placeimg.com/200/200/nature" alt="" style="border: 2px solid black; width:200px; heigh:200px; border-radius:50%;">
+                    </div>
+                    <div class="container">
+                        <h4>Welcome back, <strong>lew</strong>!</h4>
+                        <p> You have participated in 3 Threads </p>
+                        <p> Created 5 posts </p>
+                        <p> Liked Threads and Posts 3  </p>
+                        <p> Disliked Threads and Posts 1 </p>
+                    </div>
+                    
+                </div>
+            
+            <br>
+
+                <form class="input-group custom-search-form" action="http://127.0.0.1:8000/thread" method="GET">
+                    <input type="text" class="form-control" name="search" placeholder="Search Threads">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info-sm" type="submit">
+                            submit
+                        </button>
+                    </span>
+                </form>
+                <br>
+
+                            <div class="col-md-offset-6">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" role="button" onclick="window.location.href ='http://127.0.0.1:8000/thread/create'">Create Thread</button>
+                </div>
+
+                <br>
+                <h4>Forums</h4>
+
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                    <a href="http://127.0.0.1:8000/thread"> All Thread </a>
+            </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" role="button" onclick="window.location.href ='http://127.0.0.1:8000/thread?categories=1'">
+                Movies
+                <span class="badge badge-secondary  badge-pill">4</span>
+            </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" role="button" onclick="window.location.href ='http://127.0.0.1:8000/thread?categories=2'">
+                Games
+                <span class="badge badge-secondary  badge-pill">4</span>
+            </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" role="button" onclick="window.location.href ='http://127.0.0.1:8000/thread?categories=3'">
+                Quests
+                <span class="badge badge-secondary  badge-pill">2</span>
+            </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" role="button" onclick="window.location.href ='http://127.0.0.1:8000/thread?categories=4'">
+                Raids
+                <span class="badge badge-secondary  badge-pill">1</span>
+            </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" role="button" onclick="window.location.href ='http://127.0.0.1:8000/thread?categories=5'">
+                Gym Battles
+                <span class="badge badge-secondary  badge-pill">1</span>
+            </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" role="button" onclick="window.location.href ='http://127.0.0.1:8000/thread?categories=7'">
+                Food
+                <span class="badge badge-secondary  badge-pill">2</span>
+            </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" role="button" onclick="window.location.href ='http://127.0.0.1:8000/thread?categories=8'">
+                TV Shows
+                <span class="badge badge-secondary  badge-pill">0</span>
+            </li>
+            </ul>
+
+
+                <br>
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">Header</div>
+
+    <div class="card-body">
+        <h4 class="card-title">Primary card title</h4>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+</div>
+            
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<!-- jquery -->
+
+<!-- boostrap js -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.timestamp = +new Date;
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+
+<script>
+$(document).on('click', '.social-share', function(event){
+event.preventDefault();
+
+var vPosition = Math.floor(($(window).width() - popupMeta.width) / 2),
+hPosition = Math.floor(($(window).height() - popupMeta.height) / 2);
+
+var url = $(this).attr('href');
+var popup = window.open(url, 'Social Share',
+'width='+popupMeta.width+',height='+popupMeta.height+
+',left='+vpPsition+',top='+hPosition+
+',location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1');
+
+if (popup) {
+popup.focus();
+return false;
+}
+});</script>
+
+</body>
+</html>
+ 

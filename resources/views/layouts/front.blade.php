@@ -36,7 +36,18 @@
 <div  class="container-fluid" id="app">
     <div class="row">
         <div class="col-md-9">
-            <h4 class="main-content-heading">@yield('heading')</h4>
+            <div class="row">
+                <div class="d-inline-block col-md-2">
+                    <h4 class="main-content-heading">@yield('heading')</h4>
+                </div>
+
+                @if(auth()->user())
+                <div class="d-inline-block offset-8 col-md-2">
+                    @yield('sorting')
+                </div>
+                @endif
+            </div>
+
 
             @include('layouts.partials.error')
 
@@ -62,11 +73,11 @@
                         <img src="https://placeimg.com/200/200/nature" alt="" style="border: 2px solid black; width:200px; heigh:200px; border-radius:50%;">
                     </div>
                     <div class="container">
-                        <h4>Welcome back, <strong>{{auth()->user()->name}}</strong>!</h4>
-                        <p> You have participated in {{$total_threads}} Threads </p>
-                        <p> Created {{$total_posts}} posts </p>
-                        <p> Liked Threads and Posts {{$total_likes}}  </p>
-                        <p> Disliked Threads and Posts {{$total_dislikes}} </p>
+                        <h4> Welcome back, <strong style="color:orangered;">{{auth()->user()->name}}</strong>!</h4>
+                        <p> You have participated in <span class="badge badge-pill badge-info">{{$total_threads}}</span> Threads </p>
+                        <p> Created <span class="badge badge-pill badge-info"> {{$total_posts}} </span> posts  </p>
+                        <p> Liked Threads and Posts: <span class="badge badge-pill badge-success">{{$total_likes}} </span>  </p>
+                        <p> Disliked Threads and Posts: <span class="badge badge-pill badge-danger">{{$total_dislikes}} </span></p>
                     </div>
                     {{--{{auth()->user()->postsCount()}}--}}
                 </div>
@@ -77,8 +88,8 @@
                 <form class="input-group custom-search-form" action="{{route('thread.index')}}" method="GET">
                     <input type="text" class="form-control" name="search" placeholder="Search Threads">
                     <span class="input-group-btn">
-                        <button class="btn btn-info-sm" type="submit">
-                            {{--<i class="fa fa-search"></i>--}}submit
+                        <button class="btn btn-primary-sm bg-warning" type="submit">
+                            {{--<i class="fa fa-search"></i>--}}Submit
                         </button>
                     </span>
                 </form>

@@ -1,8 +1,19 @@
 <div class="card border-primary mb-3" style="max-width: 20rem;">
-    <div class="card-header">Header</div>
+    <div class="card-header">Post Your Ads Here</div>
 
-    <div class="card-body">
-        <h4 class="card-title">Primary card title</h4>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
+
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="https://images.pexels.com/photos/210126/pexels-photo-210126.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="https://images.pexels.com/photos/34639/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="https://images.pexels.com/photos/623046/pexels-photo-623046.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Third slide">
+                </div>
+            </div>
+        </div>
+
 </div>

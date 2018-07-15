@@ -5,16 +5,25 @@
 @section('banner')
     <div class="container-fluid">
         <div class="jumbotron">
-            <h1>ConEx</h1>
+            <h1 style="font-size: 4em;">ConEx</h1>
         </div>
     </div>
 @endsection
 
-
 @section('heading', "Posts")
-<a href="/thread/{{$thread->id}}?sort_key=created_at&sort_order=desc">Newest first</a>
-<a href="/thread/{{$thread->id}}?sort_key=created_at&sort_order=asc">Oldest first</a>
-<a href="/thread/{{$thread->id}}?sort_key=vote_up&sort_order=desc">Most liked first</a>
+
+@section('sorting')
+
+    <div class="nav-item dropdown">
+        <button class="nav-link dropdown-toggle btn btn-primary btn-sm pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size: 14px; margin-bottom: 10px;">Sort by</button>
+        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
+            <a class="dropdown-item" href="/thread/{{$thread->id}}?sort_key=created_at&sort_order=desc">Newest first</a>
+            <a class="dropdown-item" href="/thread/{{$thread->id}}?sort_key=created_at&sort_order=asc">Oldest first</a>
+            <a class="dropdown-item" href="/thread/{{$thread->id}}?sort_key=vote_up&sort_order=desc">Most liked first</a>
+        </div>
+    </div>
+
+@endsection
 
 @section('content')
 
@@ -40,7 +49,7 @@
         <div class="list-group" id="actual_post_{{$post->id}}">
             <div class="list-group-item">
                 <div class="media">
-                    <img class="align-self-start mr-3" src="{{$post->user->getGravatarUrl()}}" alt="Generic placeholder image">
+                    <img class="align-self-start mr-3" width="5%" src="{{$post->user->getGravatarUrl()}}" alt="Generic placeholder image">
                     <div class="media-body">
                          <div style="font-size: 13px;">{{$post->user->name}} wrote:</div>
 
@@ -63,14 +72,20 @@
             <div class="list-group-item bg-light" style="font-size: 14px;" >
                 <span class="d-inline-block col-3"> {{$thread->created_at->diffForHumans()}}</span>
                 <span class="d-inline-block offset-2 col-4">
-                    <span class="badge badge-success" id="post_{{$post->id}}_up">{{$post->vote_up}}</span>&nbsp;&nbsp;
+
                     @if(auth()->user())
                         <button type="button" class=" btn btn-sm btn-success pull-right" onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})">vote-up</button>&nbsp;
+                    @elseif(!(auth()->user()))
+                        <button type="button" class=" btn btn-sm btn-success pull-right">vote-up</button>&nbsp;
                     @endif
-                    &nbsp;
-                    <span class="badge badge-danger" id="post_{{$post->id}}_down">{{$post->vote_down}}</span>&nbsp;&nbsp;
+
+                    <span class="badge badge-success" id="post_{{$post->id}}_up">{{$post->vote_up}}</span> |
+                    <span class="badge badge-danger" id="post_{{$post->id}}_down"> {{$post->vote_down}}</span>&nbsp;&nbsp;
+
                     @if(auth()->user())
                         <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown({{$post->id}}, {{auth()->user()->id}})">vote-down</button>
+                    @elseif(!(auth()->user()))
+                        <button type="button" class=" btn btn-sm btn-danger pull-right">vote-down</button>&nbsp;
                     @endif
                 </span>
 
@@ -97,7 +112,7 @@
                     {{csrf_field()}}
                     <div class="list-group-item">
                         <div class="media">
-                            <img class="align-self-start mr-3" src="{{$post->user->getGravatarUrl()}}" alt="Generic placeholder image">
+                            <img class="align-self-start mr-3" width="5%" src="{{$post->user->getGravatarUrl()}}" alt="Generic placeholder image">
                             <div class="media-body">
                                 <div class="form-group">
                                     <label for="body"> Edit Post </label>

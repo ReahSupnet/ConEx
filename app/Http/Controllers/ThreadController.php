@@ -25,6 +25,7 @@ class ThreadController extends Controller
 
     public function index(Request $request)
     {
+
         if (auth()->user() && auth()->user()->isBanned())
         {
             auth()->logout();

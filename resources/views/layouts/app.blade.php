@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
 
     <!-- Styles -->
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <!-- <link href="{{ asset('css/main.css') }}" rel="stylesheet"> -->
 </head>
 <body>
 
