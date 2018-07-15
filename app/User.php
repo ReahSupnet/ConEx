@@ -9,13 +9,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const STATUSES = array('active' => 0, 'banned' => 1);
+    const ROLES = array('member' => 0, 'admin' => 1);
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'status',
     ];
 
     /**
@@ -29,6 +31,21 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role == 'admin';
+        return $this->role == User::ROLES['admin'];
+    }
+
+    public function printRole()
+    {
+        return array_search($this->role, User::ROLES);
+    }
+
+    public function printStatus()
+    {
+        return array_search($this->status, User::STATUSES);
+    }
+
+    public function isBanned()
+    {
+        return $this->status == User::STATUSES['banned'];
     }
 }

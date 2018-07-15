@@ -38,6 +38,8 @@
         <div class="col-md-9">
             <h4 class="main-content-heading">@yield('heading')</h4>
 
+            @include('layouts.partials.error')
+
             @yield('content')
         </div>
 
@@ -57,22 +59,21 @@
                 </div>
             @endif
 
-            @if((auth()->user()->isAdmin()))
-                @include('admin.partials.adminCategory')
-            @endif
-
             <br>
 
-            @if ($action == 'index')
+            @if ($action == 'index' || $action == 'create_post')
                 <div class="col-md-offset-6">
                     <button type="button" class="btn btn-primary btn-lg btn-block" role="button" onclick="window.location.href ='{{route('thread.create')}}'">Create Thread</button>
                 </div>
-            @endif
 
-
-            <br>@include('layouts.partials.categories')
-            <br>
+                <br>
+                @include('layouts.partials.categories')
+                <br>
                 @include('layouts.partials.ads')
+
+            @else
+                    @include('admin.partials.adminCategory')
+            @endif
 
 
 

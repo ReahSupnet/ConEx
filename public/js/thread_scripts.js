@@ -101,3 +101,18 @@ function confirmCategoryDelete(category_id) {
         });
     };
 }
+
+function banUser(user_id) {
+    if (confirm('Are you sure you want to ban this user?')) {
+        $.ajax({
+            dataType : 'json',
+            type: 'DELETE',
+            url: '/user/' + user_id,
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+        }).always(function(data) {
+            if (data['result']) {
+                $("#status_" + user_id).html("banned");
+            }
+        });
+    }
+}

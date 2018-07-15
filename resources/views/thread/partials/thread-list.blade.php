@@ -22,7 +22,7 @@
                     <li class="row" style="margin: 10px 0 -10px -20px;">
 
                         <div class="d-inline-block col-2"> Posted by: {{$thread->user->name}} </div>
-                        <div class="d-inline-block col-4">Date created: {{$thread->created_at}}</div>
+                        <div class="d-inline-block col-4"> {{$thread->created_at->diffForHumans()}}</div>
 
                         <div class="d-inline-block offset-1 col-2">Comments
                             <span class="badge badge-info">{{$thread->postCount()}}</span>

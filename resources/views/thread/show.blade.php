@@ -20,8 +20,8 @@
         <td class="d-inline-block col-1" >{{$thread->vote_up}} - {{$thread->vote_down}}</td>
         <td class="d-inline-block col-11"><h4 style="margin: -5px; color: black;"> {{$thread->subject}} </h4>
             <li class="row" style="margin: 10px 0 -10px -20px;">
-                <div class="d-inline-block col-4"> Created by: {{$thread->user->name}}</div>
-                <div class="d-inline-block col-4">Date created: {{$thread->created_at}}</div>
+                <div class="d-inline-block col-4"> Posted by: {{$thread->user->name}}</div>
+                <div class="d-inline-block col-4"> {{$thread->created_at->diffForHumans()}}</div>
                 <div class="d-inline-block offset-2 col-2">Comments &nbsp;
                     <span class="badge badge-pill badge-info" style="font-size: 15px">{{$thread->postCount()}}</span>
                 </div>
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="list-group-item bg-light" style="font-size: 14px;" >
-                <span class="d-inline-block col-3">Posted on: {{$thread->created_at}}</span>
+                <span class="d-inline-block col-3"> {{$thread->created_at->diffForHumans()}}</span>
                 <span class="d-inline-block offset-2 col-4">
                     <span class="badge badge-info" id="post_{{$post->id}}_up">{{$post->vote_up}}</span>&nbsp;&nbsp;
                     @if(auth()->user())

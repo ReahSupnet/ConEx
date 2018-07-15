@@ -21,12 +21,17 @@ class ThreadController extends Controller
 
     public function __construct() {
         $this->middleware('auth',['except' => ['index', 'show'] ]);
-
     }
 
     public function index(Request $request)
     {
         $categories = Category::all();
+
+        if (auth()->user() && auth()->user()->isBanned())
+        {
+            auth()->logout();
+            return redirect('/')->with('message', 'Your account has been banned');
+        }
 
         if ($request->input('categories'))
         {
@@ -211,4 +216,5 @@ class ThreadController extends Controller
             'saved' => $saved
         ]);
     }
+
 }

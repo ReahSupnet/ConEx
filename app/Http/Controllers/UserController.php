@@ -78,7 +78,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -87,9 +87,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->status = User::STATUSES['banned'];
+
+        return response()->json(['result' => $user->save()]);
     }
 
     public function admin()

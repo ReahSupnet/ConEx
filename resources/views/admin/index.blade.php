@@ -14,6 +14,7 @@
     <th>Email</th>
     <th>Date Joined</th>
     <th>Role</th>
+    <th>Status</th>
     <th>Action</th>
     </thead>
     @foreach ($users as $user)
@@ -23,10 +24,11 @@
         </td>
         <td> {{$user->email}} </td>
         <td> {{$user->created_at}} </td>
-        <td> {{$user->role}} </td>
+        <td> {{$user->printRole()}} </td>
+        <td id="status_{{$user->id}}"> {{$user->printStatus()}} </td>
         <td>
-            <button class="btn btn-success">Edit</button>
-            <button class="btn btn-danger">Block</button>
+            {{--<button class="btn btn-success" onclick="window.location.href ='{{route('user.update')}}'">Edit</button>--}}
+            <button class="btn btn-danger" onclick="banUser({{$user->id}})">Ban</button>
         </td>
 
     </tr>
