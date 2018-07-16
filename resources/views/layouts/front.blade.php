@@ -20,9 +20,14 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
+    {{--<link href="{{ asset('/vendor/components/font-awesome/css/fontawesome-all.css')}} " rel="stylesheet">--}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+          integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
 
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+
 </head>
 <body>
 
@@ -55,6 +60,9 @@
         </div>
 
         <div class="col-md-3 content-heading">
+
+            {{--@include('layouts.partials.helpers')--}}
+
             @php
                 use App\Reaction;
 
@@ -84,7 +92,7 @@
             @endif
 
             <br>
-
+            @if(auth()->user() && !(auth()->user()->isAdmin()))
                 <form class="input-group custom-search-form" action="{{route('thread.index')}}" method="GET">
                     <input type="text" class="form-control" name="search" placeholder="Search Threads">
                     <span class="input-group-btn">
@@ -94,6 +102,7 @@
                     </span>
                 </form>
                 <br>
+            @endif
 
             @if ($action == 'index' || $action == 'create_post')
                 <div class="col-md-offset-6">

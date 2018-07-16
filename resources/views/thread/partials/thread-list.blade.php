@@ -14,17 +14,19 @@
                         <div class="d-inline-block col-3">
 
                             @if(auth()->user())
-                                <button type="button" class=" btn btn-sm btn-success pull-right" onclick="threadVoteUp({{$thread->id}}, {{auth()->user()->id}})">vote-up</button>
+                                <button type="button" class=" btn btn-sm btn-success" onclick="threadVoteUp({{$thread->id}}, {{auth()->user()->id}})">vote-up</button>
                             @elseif(!(auth()->user()))
-                                <button type="button" class=" btn btn-sm btn-success pull-right" >vote-up</button>
+                                <button type="button" class=" btn btn-sm btn-success" >vote-up</button>
+
                             @endif
+
                                <span class="badge badge-success" id="thread_{{$thread->id}}_up">{{$thread->vote_up}}</span>
                              | <span class="badge badge-danger" id="thread_{{$thread->id}}_down">{{$thread->vote_down}}</span>
 
                             @if(auth()->user())
-                                <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="threadVoteDown({{$thread->id}}, {{auth()->user()->id}})">vote-down</button>
+                                <button type="button" class=" btn btn-sm btn-danger" onclick="threadVoteDown({{$thread->id}}, {{auth()->user()->id}})">vote-down</button>
                             @elseif (!(auth()->user()))
-                                <button type="button" class=" btn btn-sm btn-danger pull-right" >vote-down</button>
+                                <button type="button" class=" btn btn-sm btn-danger" >vote-down</button>
                             @endif
 
                         </div>
