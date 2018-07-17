@@ -74,18 +74,18 @@
                 <span class="d-inline-block offset-2 col-4">
 
                     @if(auth()->user())
-                        <button type="button" class=" btn btn-sm btn-success pull-right" onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})">vote-up</button>&nbsp;
+                        <button type="button" class=" btn btn-sm btn-success" onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})">vote-up</button>&nbsp;
                     @elseif(!(auth()->user()))
-                        <button type="button" class=" btn btn-sm btn-success pull-right">vote-up</button>&nbsp;
+                        <button type="button" class=" btn btn-sm btn-success">vote-up</button>&nbsp;
                     @endif
 
                     <span class="badge badge-success" id="post_{{$post->id}}_up">{{$post->vote_up}}</span> |
                     <span class="badge badge-danger" id="post_{{$post->id}}_down"> {{$post->vote_down}}</span>&nbsp;&nbsp;
 
                     @if(auth()->user())
-                        <button type="button" class=" btn btn-sm btn-danger pull-right" onclick="postVoteDown({{$post->id}}, {{auth()->user()->id}})">vote-down</button>
+                        <button type="button" class=" btn btn-sm btn-danger" onclick="postVoteDown({{$post->id}}, {{auth()->user()->id}})">vote-down</button>
                     @elseif(!(auth()->user()))
-                        <button type="button" class=" btn btn-sm btn-danger pull-right">vote-down</button>&nbsp;
+                        <button type="button" class=" btn btn-sm btn-danger">vote-down</button>&nbsp;
                     @endif
                 </span>
 
