@@ -12,10 +12,6 @@
 @section('heading', "Create Thread")
 
 @section('content')
-	
-	@include('layouts.partials.error')
-
-	@include('layouts.partials.success')
 
 		<div class="card bg-light mb-3">
 			<div class="container" style="margin: 10px; padding-right: 30px;">
@@ -38,7 +34,7 @@
 
 				<div class="form-group">
 					<label for="body"> Body </label>
-					<textarea type="textarea" class="form-control" name="body" id="article-ckeditor" placeholder="..." rows="5" value="{{old('subject')}}"></textarea>
+					<textarea type="textarea" class="form-control" name="body" id="article-ckeditor" placeholder="..." rows="5" value="{{old('subject')}}" required></textarea>
 				</div>
 
 				<button type="submit" class="btn btn-primary">Submit</button>

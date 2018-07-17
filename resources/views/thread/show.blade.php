@@ -36,7 +36,7 @@
             <li class="row" style="margin: 10px 0 -10px -20px;">
                 <div class="d-inline-block col-4"> Posted by: {{$thread->user->name}}</div>
                 <div class="d-inline-block col-4"> {{$thread->created_at->diffForHumans()}}</div>
-                <div class="d-inline-block offset-2 col-2">Comments &nbsp;
+                <div class="d-inline-block offset-2 col-2">Posts &nbsp;
                     <span class="badge badge-pill badge-primary">{{$thread->postCount()}}</span>
                 </div>
             </li>
@@ -74,18 +74,19 @@
                 <span class="d-inline-block offset-2 col-4">
 
                     @if(auth()->user())
-                        <button type="button" class=" btn btn-sm btn-success" onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})">vote-up</button>&nbsp;
+                        <span onclick="postVoteUp({{$post->id}}, {{auth()->user()->id}})"><img width='12%' src="{{( asset('icons/thumbsUp.png'))}}"></span>
+                        &nbsp;
                     @elseif(!(auth()->user()))
-                        <button type="button" class=" btn btn-sm btn-success">vote-up</button>&nbsp;
+                        <span><img width='12%' src="{{( asset('icons/thumbsUp.png'))}}"> </span>
                     @endif
 
                     <span class="badge badge-success" id="post_{{$post->id}}_up">{{$post->vote_up}}</span> |
                     <span class="badge badge-danger" id="post_{{$post->id}}_down"> {{$post->vote_down}}</span>&nbsp;&nbsp;
 
                     @if(auth()->user())
-                        <button type="button" class=" btn btn-sm btn-danger" onclick="postVoteDown({{$post->id}}, {{auth()->user()->id}})">vote-down</button>
+                        <span onclick="postVoteDown({{$post->id}}, {{auth()->user()->id}})"><img width='12%' src="{{( asset('icons/thunbsDown.png'))}}"></span>
                     @elseif(!(auth()->user()))
-                        <button type="button" class=" btn btn-sm btn-danger">vote-down</button>&nbsp;
+                        <span><img width='12%' src="{{( asset('icons/thunbsDown.png'))}}"> </span>
                     @endif
                 </span>
 

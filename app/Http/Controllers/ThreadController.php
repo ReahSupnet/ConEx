@@ -87,6 +87,7 @@ class ThreadController extends Controller
         //Validate
 
         $this->validate($request,[
+            'body' => 'required',
             'category_id' => 'required',
             'subject' => 'required|min:10'
         ]);

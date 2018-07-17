@@ -14,9 +14,9 @@
                         <div class="d-inline-block col-3">
 
                             @if(auth()->user())
-                                <button type="button" class=" btn btn-sm btn-success" onclick="threadVoteUp({{$thread->id}}, {{auth()->user()->id}})">vote-up</button>
+                                <span><img width='12%' src="{{( asset('icons/thumbsUp.png'))}}" onclick="threadVoteUp({{$thread->id}}, {{auth()->user()->id}})"></span>
                             @elseif(!(auth()->user()))
-                                <button type="button" class=" btn btn-sm btn-success" >vote-up</button>
+                                <span><img width='12%' src="{{( asset('icons/thumbsUp.png'))}}"> </span>
 
                             @endif
 
@@ -24,20 +24,20 @@
                              | <span class="badge badge-danger" id="thread_{{$thread->id}}_down">{{$thread->vote_down}}</span>
 
                             @if(auth()->user())
-                                <button type="button" class=" btn btn-sm btn-danger" onclick="threadVoteDown({{$thread->id}}, {{auth()->user()->id}})">vote-down</button>
+                                <span><img width='12%' src="{{( asset('icons/thunbsDown.png'))}}" onclick="threadVoteUp({{$thread->id}}, {{auth()->user()->id}})"></span>
                             @elseif (!(auth()->user()))
-                                <button type="button" class=" btn btn-sm btn-danger" >vote-down</button>
+                                <span><img width='12%' src="{{( asset('icons/thunbsDown.png'))}}"> </span>
                             @endif
 
                         </div>
 
-                        <div class="d-inline-block col-2">Comments
+                        <div class="d-inline-block col-2">Posts
                             <span class="badge badge-primary">{{$thread->postCount()}}</span>
                         </div>
 
                         <div class="d-inline-block col-1"><a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}"
-                            target="_blank" role="button" class="btn btn-primary btn-sm">
-                            Share on Fb
+                            target="_blank" role="button">
+                            <span><img width="60%" src="{{(asset('icons/share.png'))}}"    </span>
                             </a></div>
                     </li>
                 </td>
@@ -57,6 +57,7 @@
 </div>
 
 {{ $threads->links() }}
+
 
 
 

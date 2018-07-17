@@ -9,9 +9,9 @@
 <ul class="list-group">
     <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
         @if ($my_posts)
-            <a href="{{route('my_posts')}}"> All Thread </a>
+            <a href="{{route('my_posts')}}"> All Threads </a>
         @else
-            <a href="{{route('thread.index')}}"> All Thread </a>
+            <a href="{{route('thread.index')}}"> All Threads </a>
         @endif
     </li>
     @foreach ($categories as $category)
