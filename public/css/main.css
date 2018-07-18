@@ -12,19 +12,35 @@
 }
 
 .footer {
-    background: #061D25;
+    background: #23272b;
+            /*#061D25;*/
     padding: 10px 0;
 }
 .footer a {
     color: #70726F;
     font-size: 20px;
     padding: 10px;
-    border-right: 1px solid #70726F;
     transition: all .5s ease;
 }
 .footer a:first-child {
-    border-left: 1px solid #70726F;
+    /*border-left: 1px solid #70726F;*/
 }
 .footer a:hover {
     color: white;
+}
+
+.footer p {
+    color:lightgrey;
+}
+
+#logoheader {
+    width: 130%;
+    height: auto;
+    background-color: lightgrey;
+    margin-bottom: 20px; "
+}
+
+#logo {
+    width: 150%;
+    margin-left:-150px;
 }

@@ -1,7 +1,5 @@
 <div class="card border-primary mb-3" style="max-width: 20rem;">
     <div class="card-header">Post Your Ads Here</div>
-
-
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -15,5 +13,5 @@
                 </div>
             </div>
         </div>
-
+    </div>
 </div>

@@ -23,9 +23,7 @@
             <div class="card-body">
                 <input type="text" class="form-control" name="name" placeholder="Enter New Category">
                 <br>
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-dark">Add</button>
-                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-md">Add</button>
             </div>
         </form>
     </div>
