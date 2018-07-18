@@ -3,11 +3,7 @@
 @extends('layouts.front', ['action' => 'create_post'])
 
 @section('banner')
-    <div class="container-fluid">
-        <div class="jumbotron">
-            <h1 style="font-size: 4em;">ConEx</h1>
-        </div>
-    </div>
+    @include('layouts.partials.header')
 @endsection
 
 @section('heading', "Posts")
