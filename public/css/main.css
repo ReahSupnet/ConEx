@@ -44,3 +44,9 @@
     width: 150%;
     margin-left:-80px;
 }
+
+#loginfooter {
+    position:absolute;
+    bottom:0;
+    width: 100%;
+}
